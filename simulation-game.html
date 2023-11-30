@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>SIMULATION GAME</h1>
+</body>
+</html>
+<script>
+    function Vehicle(brand, model, speed, fuelType){
+        this.brand = brand;
+        this.model = model;
+        this.speed = speed;
+        this.fuelType = fuelType;
+    }
+    let Vehicle1 = new Vehicle("BMW", "BMW600", 150, "Petrol");
+    let Vehicle2 = new Vehicle("Mhindra", "thar450", 190, "Diesel");
+
+    Vehicle.prototype.accelerate = function(acce){
+        this.speed += acce;
+        console.log(`${this.brand} Speed is increasing. Now current speed is:- ${this.speed}`);
+    };
+    Vehicle.prototype.brake = function(){
+        this.speed = 0;
+        console.log(`${this.brand} Car is stopped`);
+    };
+    Vehicle.prototype.refuel = function(){
+        console.log(`${this.fuelType} is filled in ${this.brand}`);
+    };
+
+    function car(brand, model, speed, fuelType, numberofWheels){ 
+        Vehicle.call(this, brand, model, speed, fuelType);
+        this.numberofWheels = numberofWheels || 4;
+    }
+
+    car.prototype = Object.create(Vehicle.prototype); 
+
+    car.prototype.honk = function () { 
+        console.log(`${this.brand} is honking sound`);
+    };
+
+    let car1 = new car("Bularo","suzuki",130, "Diesel", "4");
+    let car2 = new car("Audi","A4",230, "Petrol", "4");
+
+
+    function Airplane(brand, model, speed, fuelType, numberofEngines, haslandingGaer){    
+        Vehicle.call(this, brand, model, speed, fuelType);
+        this.numberofEngines =numberofEngines;
+        this.haslandingGaer = haslandingGaer;
+    }
+
+    Airplane.prototype = Object.create(Vehicle.prototype);
+
+    Airplane.prototype.takeoff = function () {  
+        console.log(`${this.brand} is taking off`)
+    };
+
+    let airplane1 = new Airplane("indigo","airbus00625",1900, "Diesel", "12" , true);
+    let airplane2 = new Airplane("Qatar airways","airbus900",2200, "Diesel", "10" , true);
+
+    Vehicle1.brake()
+    Vehicle2.accelerate(40)
+    console.log(Vehicle2)
+    car2.honk()
+    console.log(car1)
+    airplane1.takeoff()
+    console.log(airplane1)
+</script>
